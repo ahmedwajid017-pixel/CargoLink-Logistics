@@ -1,58 +1,117 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CargoLink Logistics
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel web application for user authentication and member profile management, developed as part of the CargoLink Logistics project.
 
-## About Laravel
+## Project Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+CargoLink Logistics provides a secure member area where registered users can log in, access their dashboard, and manage their personal information.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Task 1: Authentication and Member Profile Management
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Features
 
-## Learning Laravel
+- **User Registration:** New users can create an account.
+- **User Login:** Registered users can log in using their email and password.
+- **Authentication Protection:** Only authenticated users can access the dashboard and profile pages.
+- **Member Profile:** Users can view and edit their personal information.
+- **Profile Updates:** Members can update their name, email address, and phone number.
+- **Form Validation:** Server-side validation helps ensure submitted profile information is valid.
+- **Database Integration:** Profile changes are saved to the application's database.
+- **No Email Verification Requirement:** Users can register and log in without verifying their email address, as required by Task 1.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Technologies Used
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP
+- Laravel
+- Laravel Breeze
+- Blade Templates
+- MySQL
+- HTML and CSS
+- Docker Compose
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Main Application Pages
 
-## Agentic Development
+| Page | Description |
+|---|---|
+| Registration | Allows new users to create an account |
+| Login | Allows existing users to sign in |
+| Dashboard | Provides access to the member area |
+| Profile | Allows authenticated members to manage their information |
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Installation and Setup
 
-```bash
-composer require laravel/boost --dev
+### Prerequisites
 
-php artisan boost:install
-```
+- Docker Desktop
+- Git
+- A web browser
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Steps
 
-## Contributing
+1. Clone the repository:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```bash
+   git clone https://github.com/ahmedwajid017-pixel/CargoLink-Logistics.git
+   ```
 
-## Code of Conduct
+2. Open the project directory:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   ```bash
+   cd CargoLink-Logistics
+   ```
 
-## Security Vulnerabilities
+3. Create your local environment configuration by copying `.env.example` to `.env`. Configure the database settings for your local Docker environment.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. Start the Docker services:
 
-## License
+   ```bash
+   docker compose up -d
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Install PHP dependencies inside the Laravel container:
+
+   ```bash
+   docker compose exec laravel.test composer install
+   ```
+
+6. Generate the application key:
+
+   ```bash
+   docker compose exec laravel.test php artisan key:generate
+   ```
+
+7. Run database migrations:
+
+   ```bash
+   docker compose exec laravel.test php artisan migrate
+   ```
+
+8. Install and build frontend dependencies if required by your environment:
+
+   ```bash
+   docker compose exec laravel.test npm install
+   docker compose exec laravel.test npm run build
+   ```
+
+9. Open the local application URL configured in your Docker setup.
+
+**Note:** Make sure your database service is running and the database credentials in `.env` match your Docker configuration before running migrations.
+
+## Security
+
+- The `.env` file contains local configuration and must not be committed to GitHub.
+- Passwords are handled using Laravel's authentication features.
+- Authentication middleware protects member-only routes.
+- Profile input is validated before updates are saved.
+
+## Task Objective
+
+The objective of Task 1 is to demonstrate Laravel authentication, protected routes, member profile management, form validation, and database persistence.
+
+## Author
+
+Developed as part of the CargoLink Logistics project.
+
+## Repository
+
+[View CargoLink Logistics on GitHub](https://github.com/ahmedwajid017-pixel/CargoLink-Logistics)
