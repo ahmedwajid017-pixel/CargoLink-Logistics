@@ -271,12 +271,14 @@
                         documents from your member portal.
                     </p>
 
-                    <a
-                        href="#"
-                        class="cl-card-link"
-                    >
-                        Documents Coming Soon →
-                    </a>
+                   
+<a
+    href="{{ route('documents.index') }}"
+    class="cl-card-link"
+>
+    My Documents →
+</a>
+
 
                 </div>
 
