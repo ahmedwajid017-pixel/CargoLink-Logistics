@@ -386,22 +386,114 @@
 
                     <!-- Password -->
                     <div class="cl-field">
-                        <label for="password">Password</label>
+    <label for="password">Password</label>
 
-                        <input
-                            id="password"
-                            class="cl-input"
-                            type="password"
-                            name="password"
-                            required
-                            autocomplete="current-password"
-                            placeholder="Enter your password"
-                        >
+    <div class="cl-password-wrapper">
+        <input
+            id="password"
+            class="cl-input"
+            type="password"
+            name="password"
+            required
+            autocomplete="current-password"
+            placeholder="Enter your password"
+        >
 
-                        @error('password')
-                            <div class="cl-error">{{ $message }}</div>
-                        @enderror
-                    </div>
+        <button
+            type="button"
+            class="cl-password-toggle"
+            id="togglePassword"
+            aria-label="Show password"
+            aria-pressed="false"
+        >
+            <svg id="eyeIcon"
+                 xmlns="http://www.w3.org/2000/svg"
+                 width="21"
+                 height="21"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>
+                <circle cx="12" cy="12" r="3"/>
+            </svg>
+        </button>
+    </div>
+
+    @error('password')
+        <div class="cl-error">{{ $message }}</div>
+    @enderror
+</div>
+
+<style>
+    .cl-password-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .cl-password-wrapper .cl-input {
+        width: 100%;
+        box-sizing: border-box;
+        padding-right: 50px;
+    }
+
+    .cl-password-toggle {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        border: none;
+        background: transparent;
+        color: #94a3b8;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+
+    .cl-password-toggle:hover {
+        color: #2563eb;
+        background: #eff6ff;
+    }
+
+    .cl-password-toggle:focus-visible {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const passwordInput = document.getElementById('password');
+        const toggleButton = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        if (!passwordInput || !toggleButton || !eyeIcon) {
+            return;
+        }
+
+        toggleButton.addEventListener('click', function () {
+            const isHidden = passwordInput.type === 'password';
+
+            passwordInput.type = isHidden ? 'text' : 'password';
+
+            toggleButton.setAttribute(
+                'aria-label',
+                isHidden ? 'Hide password' : 'Show password'
+            );
+
+            toggleButton.setAttribute('aria-pressed', String(isHidden));
+
+            eyeIcon.innerHTML = isHidden
+                ? '<path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c6.4 0 10 7 10 7a15.8 15.8 0 0 1-3 3.8"/><path d="M6.6 6.6C3.7 8.4 2 12 2 12s3.6 7 10 7a10.4 10.4 0 0 0 4-.8"/>'
+                : '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>';
+        });
+    });
+</script>
 
                     <div class="cl-options">
 
