@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +25,11 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/documents/{document}/download', [DocumentController::class, 'download'])
       ->name('documents.download');
+      Route::get('/notifications', [NotificationController::class, 'index'])
+    ->name('notifications.index');
+
+Route::patch('/notifications/{notification}/read', [NotificationController::class, 'markRead'])
+    ->name('notifications.read');
 });
 
 

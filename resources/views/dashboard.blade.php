@@ -1,6 +1,16 @@
 <x-app-layout>
 
     <style>
+        .cl-notification-badge {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 5px 11px;
+    border-radius: 20px;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 12px;
+    font-weight: 700;
+}
         .cl-dashboard {
             background: #f4f7fb;
             min-height: calc(100vh - 65px);
@@ -298,12 +308,18 @@
                         and logistics-related notifications.
                     </p>
 
-                    <a
-                        href="#"
-                        class="cl-card-link"
-                    >
-                        Notifications Coming Soon →
-                    </a>
+                    <a href="{{ route('notifications.index') }}" class="cl-card-link">
+    View Notifications
+</a>
+@php
+    $unreadCount = Auth::user()->notifications()->whereNull('read_at')->count();
+@endphp
+
+@if ($unreadCount > 0)
+    <span class="cl-notification-badge">
+        {{ $unreadCount }} new
+    </span>
+@endif
 
                 </div>
 
