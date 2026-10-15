@@ -179,6 +179,49 @@
         .cl-profile-button:hover {
             background: #0f4c81;
         }
+.cl-recent-documents {
+    margin: 0 0 18px;
+    padding: 0;
+    list-style: none;
+}
+
+.cl-recent-documents li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e5eaf0;
+    color: #334155;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.cl-recent-documents li:last-child {
+    border-bottom: none;
+}
+
+.cl-document-date {
+    display: block;
+    margin-top: 4px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.cl-empty-message {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.cl-notification-badge {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 5px 11px;
+    border-radius: 20px;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
 
         @media (max-width: 900px) {
             .cl-cards {
@@ -252,9 +295,9 @@
                     </h3>
 
                     <p>
-                        View and update your personal information,
-                        contact details and account information.
-                    </p>
+    Welcome, {{ $user->name }}. View and update your personal
+    information and contact details.
+</p>
 
                     <a
                         href="{{ route('profile.edit') }}"
@@ -276,54 +319,67 @@
                         Documents
                     </h3>
 
-                    <p>
-                        Upload, manage and access your shipping
-                        documents from your member portal.
-                    </p>
+                   <p>
+    Your three most recent uploaded documents.
+</p>
 
-                   
-<a
-    href="{{ route('documents.index') }}"
-    class="cl-card-link"
->
-    My Documents →
+@if ($documents->isNotEmpty())
+    <ul class="cl-recent-documents">
+        @foreach ($documents as $document)
+            <li>
+                <strong>{{ $document->original_name }}</strong>
+
+                <span class="cl-document-date">
+                    Uploaded {{ $document->created_at->format('d M Y') }}
+                </span>
+            </li>
+        @endforeach
+    </ul>
+@else
+    <div class="cl-empty-message">
+        You have not uploaded any documents yet.
+    </div>
+@endif
+
+<a href="{{ route('documents.index') }}" class="cl-card-link">
+    View All Documents
 </a>
 
 
                 </div>
 
                 <!-- Notifications -->
-                <div class="cl-card">
+<div class="cl-card">
 
-                    <div class="cl-card-icon">
-                       <i class="fas fa-bell"></i>
-                    </div>
+    <div class="cl-card-icon">
+        <i class="fas fa-bell"></i>
+    </div>
 
-                    <h3>
-                        Notifications
-                    </h3>
+    <h3>Notifications</h3>
 
-                    <p>
-                        Stay updated with important system messages
-                        and logistics-related notifications.
-                    </p>
+    <p>
+        Stay updated with important system messages
+        and logistics-related notifications.
+    </p>
 
-                    <a href="{{ route('notifications.index') }}" class="cl-card-link">
-    View Notifications
-</a>
-@php
-    $unreadCount = Auth::user()->notifications()->whereNull('read_at')->count();
-@endphp
+    @if ($unreadCount > 0)
+        <span class="cl-notification-badge">
+            {{ $unreadCount }} new
+        </span>
+    @else
+        <div class="cl-empty-message">
+            You have no unread notifications.
+        </div>
+    @endif
 
-@if ($unreadCount > 0)
-    <span class="cl-notification-badge">
-        {{ $unreadCount }} new
-    </span>
-@endif
+    <a href="{{ route('notifications.index') }}" class="cl-card-link">
+        View All Notifications
+    </a>
 
-                </div>
+ </div>
 
             </div>
+            <!-- End cards grid -->
 
             <!-- Account -->
             <div class="cl-account">
@@ -333,31 +389,30 @@
                     <div class="cl-account-info">
 
                         <div class="cl-avatar">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
                         </div>
 
                         <div>
                             <div class="cl-account-name">
-                                {{ Auth::user()->name }}
+                                {{ $user->name }}
                             </div>
 
                             <div class="cl-account-email">
-                                {{ Auth::user()->email }}
+                                {{ $user->email }}
                             </div>
                         </div>
 
                     </div>
 
-                    <a
-                        href="{{ route('profile.edit') }}"
-                        class="cl-profile-button"
-                    >
+                    <a href="{{ route('profile.edit') }}" class="cl-profile-button">
                         Edit Profile
                     </a>
 
                 </div>
 
             </div>
+            <!-- End Account -->
+
 
         </div>
 
