@@ -303,7 +303,7 @@
                         href="{{ route('profile.edit') }}"
                         class="cl-card-link"
                     >
-                        Manage Profile →
+                        Manage Profile 
                     </a>
 
                 </div>
