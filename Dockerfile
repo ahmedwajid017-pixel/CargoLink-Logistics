@@ -19,6 +19,7 @@ RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 WORKDIR /var/www/html
 
 COPY . .
+RUN mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs bootstrap/cache
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction \
     && npm install \
