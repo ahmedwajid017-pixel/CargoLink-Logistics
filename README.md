@@ -73,12 +73,13 @@ The application is deployed on Railway with a MySQL database.
 
 ## Demo Credentials
 
-CargoLink is a member-focused portal and does not currently implement a separate admin role or admin panel.
+CargoLink Logistics is a member-focused portal and does not currently have a separate admin role or admin panel.
 
-- **Demo Email:** `test@example.com` *(verify on the live application)*
-- **Demo Password:** `password` *(verify on the live application)*
+- **Demo Login URL:** https://cargolink-logistics-production.up.railway.app
+- **Demo Email:** `test@example.com`
+- **Demo Password:** `password`
 
-These credentials are defined in the development seeder. Confirm they work on the deployed application before using them for evaluation.
+These credentials provide access to the member dashboard and its profile, documents, and notifications features.
 
 ## Security
 
