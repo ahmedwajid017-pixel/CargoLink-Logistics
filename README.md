@@ -1,29 +1,37 @@
 # CargoLink Logistics
 
-CargoLink Logistics is a Laravel-based member portal that allows registered users to manage their profiles, upload and download documents, and receive system notifications through a unified dashboard.
+CargoLink Logistics is a Laravel-based member portal that enables registered users to manage their profiles, upload and download documents securely, and receive system notifications through a personalized dashboard.
+
+## Live Demo
+
+- **Live Application:** https://cargolink-logistics-production.up.railway.app
+- **GitHub Repository:** https://github.com/ahmedwajid017-pixel/CargoLink-Logistics
+- **Hosting Platform:** Railway
+
+Users can register an account or log in to access the member portal.
 
 ## Features
 
-### Task 1: Authentication and Profile Management
-- User registration and login.
-- Authentication-protected dashboard and profile.
-- Edit and update profile information, including name, email, and phone number.
+### 1. Authentication and Profile Management
+- User registration and login using Laravel Breeze.
+- Authentication-protected dashboard and profile pages.
+- Update profile information, including name, email, and phone number.
 - Input validation and database integration.
 - Email verification is not required for login.
 
-### Task 2: Document Management
+### 2. Document Management
 - Upload PDF and image files up to 5 MB.
 - Store uploaded documents using Laravel's public storage disk.
 - View uploaded documents and their upload dates.
-- Download documents securely, with ownership checks.
+- Download documents securely with ownership checks.
 
-### Task 3: Notifications
+### 3. Notifications
 - View notifications in chronological order.
 - Display unread notification counts on the dashboard.
 - Mark notifications as read.
-- Distinguish read and unread notifications.
+- Visually distinguish read and unread notifications.
 
-### Task 4: Dashboard Integration
+### 4. Dashboard Integration
 - Display a personalized dashboard after login.
 - Show account and profile information.
 - Display the three most recent uploaded documents.
@@ -38,54 +46,98 @@ CargoLink Logistics is a Laravel-based member portal that allows registered user
 - Blade Templates
 - MySQL
 - HTML and CSS
+- JavaScript
 - Docker Compose
+- Railway
 
 ## Installation and Setup
 
 ### Prerequisites
-- Docker Desktop
-- Git
-- A web browser
+
+Install the following tools before setting up the project:
+
+- [Git](https://git-scm.com/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Composer](https://getcomposer.org/)
+- [Node.js and npm](https://nodejs.org/)
 
 ### Setup Instructions
 
-1. Clone the repository:
+**1. Clone the repository**
 
-   `git clone https://github.com/ahmedwajid017-pixel/CargoLink-Logistics.git`
+```bash
+git clone https://github.com/ahmedwajid017-pixel/CargoLink-Logistics.git
+```
 
-2. Navigate to the project directory:
+**2. Navigate to the project directory**
 
-   `cd CargoLink-Logistics`
+```bash
+cd CargoLink-Logistics
+```
 
-3. Create the environment file by copying `.env.example` to `.env`.
+**3. Install PHP dependencies**
 
-4. Start the Docker containers:
+```bash
+composer install
+```
 
-   `docker compose up -d`
+**4. Configure the environment**
 
-5. Install PHP dependencies:
+Copy `.env.example` to `.env` if the environment file does not already exist. Configure the database settings to match the Docker Compose configuration.
 
-   `docker compose exec laravel.test composer install`
+**5. Start Docker containers**
 
-6. Generate the application key:
+```bash
+docker compose up -d
+```
 
-   `docker compose exec laravel.test php artisan key:generate`
+**6. Generate the application key**
 
-7. Run database migrations:
+```bash
+docker compose exec laravel.test php artisan key:generate
+```
 
-   `docker compose exec laravel.test php artisan migrate`
+**7. Run database migrations**
 
-8. Install frontend dependencies and build assets:
+```bash
+docker compose exec laravel.test php artisan migrate
+```
 
-   `npm install`
+**8. Install and build frontend assets**
 
-   `npm run build`
+```bash
+npm install
+npm run build
+```
 
-9. Create the public storage link:
+**9. Create the public storage link**
 
-   `docker compose exec laravel.test php artisan storage:link`
+```bash
+docker compose exec laravel.test php artisan storage:link
+```
 
-10. Open the local application URL configured by your Docker environment.
+**10. Access the application**
+
+Open the local application URL configured in your Docker environment.
+
+## Database Seeding
+
+To create sample notifications for an existing user, run:
+
+```bash
+docker compose exec laravel.test php artisan db:seed --class=NotificationSeeder
+```
+
+Run this command only after the database migrations have completed and at least one user exists.
+
+## Deployment
+
+The application is deployed on Railway and uses a MySQL database service.
+
+- **Live URL:** https://cargolink-logistics-production.up.railway.app
+- Configure production environment variables through the Railway service settings.
+- Keep `APP_DEBUG=false` in production.
+- Keep application keys, database passwords, and other secrets private.
 
 ## Security
 
@@ -93,8 +145,12 @@ CargoLink Logistics is a Laravel-based member portal that allows registered user
 - Profile data is validated before saving.
 - Uploaded files are restricted by type and size.
 - Users can download only their own documents.
-- Environment secrets should remain in `.env` and must not be committed to GitHub.
+- Environment secrets must remain in `.env` and must not be committed to GitHub.
 
-## Repository
+## Project Repository
 
-[CargoLink Logistics on GitHub](https://github.com/ahmedwajid017-pixel/CargoLink-Logistics)
+Source code, migrations, controllers, models, views, and setup instructions are available here:
+
+https://github.com/ahmedwajid017-pixel/CargoLink-Logistics
+
+Developed as a Laravel web application project to demonstrate authentication, profile management, secure document handling, notification functionality, database integration, and deployment.
