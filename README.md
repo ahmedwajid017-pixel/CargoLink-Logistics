@@ -71,15 +71,16 @@ The application is deployed on Railway with a MySQL database.
 - Keep `APP_DEBUG=false` in production.
 - Never commit application keys or database passwords to GitHub.
 
-## Demo Credentials
+## Admin Credentials
 
-CargoLink Logistics is a member-focused portal and does not currently have a separate admin role or admin panel.
+- **Email:** `admin@cargolink.test`
+- **Password:** `password`
 
-- **Demo Login URL:** https://cargolink-logistics-production.up.railway.app
-- **Demo Email:** `test@example.com`
-- **Demo Password:** `password`
+## Member Demo Credentials
 
-These credentials provide access to the member dashboard and its profile, documents, and notifications features.
+- **Email:** `test@example.com`
+- **Password:** `password`
+- **Login URL:** https://cargolink-logistics-production.up.railway.app
 
 ## Security
 
