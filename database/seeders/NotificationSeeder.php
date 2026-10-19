@@ -10,12 +10,7 @@ class NotificationSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = User::first();
-
-        if (! $user) {
-            $this->command->warn('No users found. Register a user first.');
-            return;
-        }
+        $user = User::where('email', 'test@example.com')->firstOrFail();
 
         $messages = [
             'Welcome to CargoLink Logistics.',
@@ -24,12 +19,15 @@ class NotificationSeeder extends Seeder
         ];
 
         foreach ($messages as $message) {
-            Notification::firstOrCreate([
-                'member_id' => $user->id,
-                'message' => $message,
-            ]);
+            Notification::firstOrCreate(
+                [
+                    'member_id' => $user->id,
+                    'message' => $message,
+                ],
+                [
+                    'read_at' => null,
+                ]
+            );
         }
-
-        $this->command->info('Sample notifications created.');
     }
 }
